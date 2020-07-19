@@ -8,14 +8,23 @@
 
   <div class="collapse navbar-collapse" id="mynav">
       <ul class="navbar-nav mr-auto">
-        <li class="navbar-item">
+        <li class="navbar-item" *ngIf="loginService.currentUsername != null">
           <a class="nav-link" routerLink="dashboard">Dashboard</a>
         </li>
         <li class="navbar-item">
           <a class="nav-link" routerLink="about-us">About Us</a>
         </li>
-        <li class="navbar-item">
+        <li class="navbar-item" *ngIf="loginService.currentUsername != null">
           <a class="nav-link" routerLink="projects">Projects</a>
+        </li>
+        <li class="navbar-item" *ngIf="loginService.currentUsername != null">
+          <a class="nav-link" href="#">{{loginService.currentUsername}}</a>
+        </li>
+        <li class="navbar-item" *ngIf="loginService.currentUsername != null">
+          <a class="nav-link" href="#" (click)="loginService.doLogout()">Logout</a>
+        </li>
+        <li class="navbar-item" *ngIf="loginService.currentUsername == null">
+          <a class="nav-link" routerLink="login">Login</a>
         </li>
       </ul>
   </div>
