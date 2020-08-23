@@ -10,7 +10,8 @@
 <div class="row">
   <div class="col-lg-3 pb-3" style="background-color: #e9e6e6; ">
     <div class="row">
-      <div class="col-11 text-white text-center mx-auto rounded pt-2 pb-2 mt-1 font-weight-bold" style="background-color: #a39e9c; font-family: ‘Arial Narrow Bold’, sans-serif">
+      <div class="col-11 text-white text-center mx-auto rounded pt-2 pb-2 mt-1 font-weight-bold"
+          style="background-color: #a39e9c; font-family: ‘Arial Narrow Bold’, sans-serif">
         {{Designation | uppercase}}
       </div>
       <div class="col-12 text-center mt-2">
@@ -62,7 +63,8 @@
     		<div class="row mt-1">
     			<div class="col-6 text-left">
     				<div class="dropdown">
-    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">Project A</button>
+    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown">Project A</button>
     					<div class="dropdown-menu">
     						<a class="dropdown-item" href="#" onclick="return false" (click)="onProjectChange($event)"
                     *ngFor="let project of Projects">{{project}}</a>
@@ -71,7 +73,8 @@
     			</div>
     			<div class="col-6 text-right">
     				<div class="dropdown">
-    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">2020</button>
+    					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                  data-toggle="dropdown">2020</button>
     					<div class="dropdown-menu">
     						<a class="dropdown-item" href="#" *ngFor="let year of Years">
                   <span [ngSwitch]="year">
@@ -86,7 +89,8 @@
     			</div>
     		</div>
     	</div>
-      <div class="col-11 mx-auto mt-1 text-white text-center pt-2 pb-2 rounded font-weight-bold" style="background-color: #718d97; font-family: ‘Arial Narrow’">PROJECT BRIEFING</div>
+      <div class="col-11 mx-auto mt-1 text-white text-center pt-2 pb-2 rounded font-weight-bold"
+          style="background-color: #718d97; font-family: ‘Arial Narrow’">PROJECT BRIEFING</div>
     	<div class="col-12">
     		<table class="table table-borderless">
     			<tr>
@@ -104,7 +108,8 @@
     			</tr>
     		</table>
     	</div>
-      <div class="col-11 mx-auto mt-1 text-white text-center pt-2 pb-2 rounded font-weight-bold" style="background-color: #718d97; font-family: ‘Arial Narrow’">TEAM MEMBERS SUMMARY</div>
+      <div class="col-11 mx-auto mt-1 text-white text-center pt-2 pb-2 rounded font-weight-bold"
+          style="background-color: #718d97; font-family: ‘Arial Narrow’">TEAM MEMBERS SUMMARY</div>
     	<div class="col-12">
     		<table class="table table-borderless">
     			<tr>
@@ -123,13 +128,15 @@
   </div>
   <div class="col-lg-3" style="background-color: #e9e6e6">
     <div class="row">
-	     <div class="col-11 mx-auto mt-1 text-white text-center pt-1 pb-2 mx-2 rounded font-weight-bold" style="background-color: #718d97; font-family: ‘Arial Narrow’">TEAM MEMBERS</div>
+	     <div class="col-11 mx-auto mt-1 text-white text-center pt-1 pb-2 mx-2 rounded font-weight-bold"
+          style="background-color: #718d97; font-family: ‘Arial Narrow’">TEAM MEMBERS</div>
 	     <div class="col-lg-12 pt-2">
       		<div class="accordion" id="accordion1">
       			<div class="card" *ngFor="let teamMember of TeamMembers; let i = index;">
       				<div class="card-header bg-secondary">
       					<h2 class="mb-0">
-      						<button class="btn btn-link text-white" type="button" data-toggle="collapse" [attr.data-target]="'#cardbody'+ i">{{teamMember.Region}}</button>
+      						<button class="btn btn-link text-white" type="button" data-toggle="collapse"
+                      [attr.data-target]="'#cardbody'+ i">{{teamMember.Region}}</button>
       					</h2>
       				</div>
       				<div [id]="'cardbody' + i" class="collapse" [ngClass]="(i == 0 ? 'show' : '')" data-parent="#accordion1">

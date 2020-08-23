@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 import { ProjectsService } from '../../projects.service';
+import { ClientLocationsService } from '../../client-locations.service';
+
 import { Project } from 'src/app/Project';
+import { ClientLocation } from 'src/app/client-location';
 
 @Component({
   selector: 'app-projects',
@@ -12,6 +15,9 @@ import { Project } from 'src/app/Project';
 export class ProjectsComponent implements OnInit {
 
   projects: Project[];
+  clientLocations: ClientLocation[];
+  showLoading: boolean = true;
+
   newProject: Project = new Project();
   editProject: Project = new Project();
   editIndex: number;
@@ -19,18 +25,29 @@ export class ProjectsComponent implements OnInit {
   deleteIndex: number;
   searchText: string;
 
-  constructor(private projectsService : ProjectsService, private datePipe : DatePipe) {
+  constructor(private projectsService : ProjectsService, private datePipe : DatePipe,
+    private clientLocationsService : ClientLocationsService) {
   }
 
   ngOnInit() {
     this.projectsService.getAllProjects().subscribe(
       (resp : Project[]) => {
         this.projects = resp;
+        this.showLoading = false;
+      }
+    );
+    this.clientLocationsService.getClientLocations().subscribe(
+      (resp : ClientLocation[]) => {
+        this.clientLocations = resp;
+      },
+      (err) => {
+        console.error(err);
       }
     );
   }
 
   onSaveClick() {
+    this.newProject.clientLocation.clientLocationId = 0;
     this.projectsService.insertProject(this.newProject).subscribe(
       (resp) => {
         // Add project to grid
@@ -39,6 +56,10 @@ export class ProjectsComponent implements OnInit {
         p.projectName = resp.projectName;
         p.dateOfStart = resp.dateOfStart;
         p.teamSize = resp.teamSize;
+        p.clientLocation = resp.clientLocation;
+        p.active = resp.active;
+        p.clientLocationId = resp.clientLocationId
+        p.status = resp.status;
         this.projects.push(p);
 
         // clear new project dialog
@@ -46,6 +67,9 @@ export class ProjectsComponent implements OnInit {
         this.newProject.projectName = null;
         this.newProject.dateOfStart = null;
         this.newProject.teamSize = null;
+        this.newProject.active = false;
+        this.newProject.clientLocationId = null;
+        this.newProject.status = null;
       },
       (err) => {
         console.error(err);
@@ -59,6 +83,10 @@ export class ProjectsComponent implements OnInit {
     this.editProject.dateOfStart = this.projects[index].dateOfStart;
     // this.datePipe.transform(this.projects[index].dateOfStart,"dd/mm/yyyy");
     this.editProject.teamSize = this.projects[index].teamSize;
+    this.editProject.active = this.projects[index].active;
+    this.editProject.clientLocationId = this.projects[index].clientLocationId;
+    this.editProject.status = this.projects[index].status;
+    this.editProject.clientLocation = this.projects[index].clientLocation;
   }
 
   onUpdateClick() {
@@ -70,6 +98,10 @@ export class ProjectsComponent implements OnInit {
         p.projectName = resp.projectName;
         p.dateOfStart = resp.dateOfStart;
         p.teamSize = resp.teamSize;
+        p.clientLocation = resp.clientLocation;
+        p.active = resp.active;
+        p.clientLocationId = resp.clientLocationId
+        p.status = resp.status;
         this.projects[this.editIndex] = p;
 
         // clear new project dialog
@@ -77,6 +109,9 @@ export class ProjectsComponent implements OnInit {
         this.editProject.projectName = null;
         this.editProject.dateOfStart = null;
         this.editProject.teamSize = null;
+        this.editProject.active = false;
+        this.editProject.clientLocationId = null;
+        this.editProject.status = null;
       },
       (err) => {
         console.error(err);
